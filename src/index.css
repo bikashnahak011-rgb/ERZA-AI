@@ -119,7 +119,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
 }
 
 .message-content {
-  max-width: 75%; padding: 14px 18px; border-radius: 14px;
+  max-width: 85%; padding: 14px 18px; border-radius: 14px;
   font-size: 14px; line-height: 1.7;
 }
 .message.assistant .message-content {
@@ -231,11 +231,48 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
   .avatar-close-btn { display: none !important; }
 
   .app { flex-direction: column; }
-  .main { width: 100vw; height: 100vh; }
-  .message-bubble { max-width: 90%; }
-  .message-content { max-width: 90%; font-size: 13px; }
+  .main { width: 100vw; height: 100vh; overflow: hidden; }
+
+  .chat-window { padding: 10px 8px 10px 8px; gap: 10px; }
+
+  /* Full-width message row */
+  .message {
+    gap: 6px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .message-avatar {
+    width: 26px; height: 26px;
+    font-size: 9px; flex-shrink: 0;
+  }
+
+  /* Bubble wrapper fills remaining space */
+  .message.assistant .message-bubble {
+    flex: 1;
+    min-width: 0;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .message.assistant .message-content {
+    max-width: 100% !important;
+    width: 100% !important;
+    font-size: 13px;
+    padding: 10px 12px;
+    box-sizing: border-box;
+  }
+
+  /* User bubble stays capped */
+  .message.user .message-bubble {
+    max-width: 85% !important;
+  }
+  .message.user .message-content {
+    max-width: 100% !important;
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
   .suggestions { display: none; }
-  .chat-window { padding: 14px 10px; gap: 14px; }
   .input-area { padding: 8px 10px 12px; }
   .input-bar input { font-size: 13px; }
 }
@@ -752,8 +789,8 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
 
 /* ── Message Bubble Wrapper ── */
 .message-bubble { display: flex; flex-direction: column; gap: 6px; max-width: 75%; }
-.message.user .message-bubble { align-items: flex-end; }
-.message.assistant .message-bubble { align-items: flex-start; }
+.message.user .message-bubble { align-items: flex-end; max-width: 75%; }
+.message.assistant .message-bubble { align-items: flex-start; max-width: 75%; }
 
 /* Bookmarked highlight */
 .msg-bookmarked .message-content {
