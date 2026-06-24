@@ -76,10 +76,11 @@ export default function useJarvis() {
 
     const prompt = `${langTag}\n[Active Mode: ${modeLabel}]\n\nUser says: ${text}`;
 
-    const history = (historyOverride || messages)
+    let history = (historyOverride || messages)
       .filter(m => m.role === "user" || m.role === "assistant")
-      .slice(-20)
       .map(m => ({ role: m.role, content: m.content }));
+
+    // Always read COMPLETE chat history - no limits
 
     const result = await groq.chat.completions.create({
       model: "llama-3.3-70b-versatile",
@@ -88,7 +89,7 @@ export default function useJarvis() {
         ...history,
         { role: "user", content: prompt },
       ],
-      max_tokens: 4096,
+      max_tokens: 8000,
       temperature: 0.7,
     });
     return result.choices[0].message.content;
