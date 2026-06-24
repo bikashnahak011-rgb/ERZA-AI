@@ -4,9 +4,11 @@ export default function Sidebar({ mode, setMode, lang, setLang, onClear }) {
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <div className="logo-arc" />
+        <div className="logo-arc">
+          <span className="logo-icon" aria-hidden="true">🤖</span>
+        </div>
         <h1>ERZA</h1>
-        <p>AI Assistant</p>
+        <p>AI Chatbot</p>
       </div>
 
       <div className="sidebar-section">
